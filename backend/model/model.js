@@ -7,10 +7,11 @@ const brandSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
+    required: true,
   },
   shoes: [
     {
-      type: mongoose.mongo.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Shoes",
     },
   ],
