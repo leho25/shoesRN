@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const app = express();
 const brandRouter = require("./routes/brand");
+const shoesRouter = require("./routes/shoes");
 
 const port = 8080;
 dotenv.config();
@@ -20,6 +21,8 @@ app.use(cors());
 app.use(morgan("common"));
 //ROUTERS
 app.use("/v1/brand", brandRouter);
+
+app.use("/v1/shoes", shoesRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
