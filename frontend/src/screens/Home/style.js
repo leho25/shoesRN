@@ -21,10 +21,10 @@ export default style = StyleSheet.create({
     justifyContent:'space-around'
   },
   item: {
-    backgroundColor: 'red',
     marginVertical: 10,
     width: '45%',
     borderWidth: 1,
+    padding:10
   },
   nameItem: {
     fontSize: 16,
