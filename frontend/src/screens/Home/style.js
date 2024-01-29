@@ -14,21 +14,24 @@ export default style = StyleSheet.create({
     textAlign: 'center',
   },
   viewItem: {
-    flex: 1,
     margin: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent:'space-around'
+    justifyContent: 'space-around',
   },
   item: {
     marginVertical: 10,
     width: '45%',
     borderWidth: 1,
-    padding:10
+    padding: 10,
   },
   nameItem: {
     fontSize: 16,
     color: 'black',
     paddingLeft: 8,
+  },
+  image: {
+    width: 150,
+    height: 150,
   },
 });

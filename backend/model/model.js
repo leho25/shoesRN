@@ -28,6 +28,12 @@ const shoesSchema = new mongoose.Schema({
   category: {
     type: [String],
   },
+  price: {
+    type: Number,
+  },
+  image: {
+    type: String,
+  },
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Brand",

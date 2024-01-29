@@ -1,10 +1,10 @@
-import React from "react";
-import Home from "./Home/home";
+import React from 'react';
+import Home from './Home/home';
 
-const Index = () =>{
-    return(
-        <Home />
-    )
-}
+const Index = () => {
+  return (
+      <Home />
+  );
+};
 
-export default Index
+export default Index;

@@ -7,7 +7,6 @@ const app = express();
 const brandRouter = require("./routes/brand");
 const shoesRouter = require("./routes/shoes");
 
-const port = 8080;
 dotenv.config();
 //CONNECT DATABASE
 const connectToMongo = async () => {
@@ -24,6 +23,6 @@ app.use("/v1/brand", brandRouter);
 
 app.use("/v1/shoes", shoesRouter);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen("3000", "192.168.1.157", () => {
+  console.log(`Service is running`);
 });

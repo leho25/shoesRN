@@ -1,29 +1,39 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import style from './style';
-import {useSelector,useDispatch} from 'react-redux';
-import { updateUser } from '../../redux/apiRequests';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {getAllShoes} from '../../redux/apiRequests';
+import CardShoes from './cardShoes';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const username = useSelector(state => state.user);
-  useEffect(()=>{
-    dispatch(updateUser());
-  },[])
+  const shoes = useSelector(state => state.shoes);
+  useEffect(() => {
+    dispatch(getAllShoes());
+  }, []);
   return (
     <View style={style.main}>
       <View style={style.bgTitle}>
         <Text style={style.textTitle}>Home</Text>
       </View>
       <ScrollView>
-        <View style={style.viewItem}>
-          <View style={style.item}>
-            <Text>Hình</Text>
-            <Text style={style.generalItem}>{username}</Text>
-            <Text style={style.generalItem}>Giá</Text>
+        {shoes.pending ? (
+          <Text>Loading...</Text>
+        ) : (
+          <View style={style.viewItem}>
+            {shoes.shoes.map(item => {
+              return (
+                <View style={style.item} key={item._id}>
+                  <CardShoes
+                    name={item.name}
+                    price={item.price}
+                    image={item.image}
+                  />
+                </View>
+              );
+            })}
           </View>
-        </View>
+        )}
       </ScrollView>
     </View>
   );
