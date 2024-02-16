@@ -25,13 +25,34 @@ export default style = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-  nameItem: {
+  generalItem: {
     fontSize: 16,
     color: 'black',
-    paddingLeft: 8,
+    fontWeight: '600',
   },
   image: {
     width: 150,
     height: 150,
   },
+  cardShoes: {
+    alignItems: 'center',
+  },
+  cardInfor: {
+    width: '100%',
+    paddingHorizontal: 7,
+  },
+  btnCart:{
+    width:'90%',
+    backgroundColor:'red',
+    alignItems:'center',
+    height:40,
+    justifyContent:'center',
+    borderRadius:10,
+    marginTop:5
+  },
+  btnTitleCart:{
+    fontSize:16,
+    color:"white",
+    fontWeight:'600'
+  }
 });
