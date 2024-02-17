@@ -4,6 +4,7 @@ import Index from './src/screens';
 import store from './src/redux/store';
 import { Provider } from 'react-redux';
 
+
 const App = () => {
   return(
     <Provider store={store}>

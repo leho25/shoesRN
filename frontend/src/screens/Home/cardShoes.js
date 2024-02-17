@@ -3,7 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import style from './style';
 
 const CardShoes = props => {
-  const {name, _id, price, image} = props;
+  const {name, _id, price, image,navigation} = props;
   return (
     <View style={style.cardShoes}>
       <Image source={{uri: image}} style={style.image} resizeMode="cover" />
@@ -12,7 +12,7 @@ const CardShoes = props => {
         <Text style={style.generalItem}>Price: {price}</Text>
       </View>
       <TouchableOpacity style={style.btnCart} onPress={()=>{
-        console.log("Test")
+        navigation.navigate('HomeDetail');
       }}>
         <Text style={style.btnTitleCart}>Thêm vào giỏ hàng</Text>
       </TouchableOpacity>
