@@ -51,7 +51,7 @@ const Index = () => {
           component={MainScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="HomeDetail" component={HomeDetail} />
+        <Stack.Screen name="HomeDetail" component={HomeDetail} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
