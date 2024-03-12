@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("")
 const User = require("../model/User");
 const authController = {
   //REGISTER
