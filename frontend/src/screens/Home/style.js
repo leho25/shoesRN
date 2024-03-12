@@ -5,7 +5,15 @@ export default style = StyleSheet.create({
     flex: 1,
   },
   bgTitle: {
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
+    shadowColor:'#000',
+    shadowOffset:{
+      width:0,
+      height:3
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 4,
   },
   textTitle: {
     fontSize: 32,

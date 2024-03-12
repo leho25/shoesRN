@@ -4,6 +4,7 @@ import Home from './Home/home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeDetail from './HomeDetail/homeDelail';
+import Login from './Login/login';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Cart from './Cart/cart';
@@ -18,7 +19,7 @@ const MainScreen = () => {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name ==='Cart'){
+          } else if (route.name === 'Cart') {
             iconName = focused ? 'cart' : 'cart-outline';
           }
           // You can return any component that you like here!
@@ -45,13 +46,22 @@ const MainScreen = () => {
 const Index = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Main"
           component={MainScreen}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="HomeDetail" component={HomeDetail} options={{headerShown:false}}/>
+        <Stack.Screen
+          name="HomeDetail"
+          component={HomeDetail}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
