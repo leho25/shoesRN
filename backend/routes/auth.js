@@ -5,5 +5,7 @@ const router = require("express").Router();
 router.post("/register", authController.register);
 //LOGIN
 router.post("/login", authController.loginUser);
+//REFRESH
+router.post("/refresh",authController.requestRefreshToken);
 
 module.exports = router;
