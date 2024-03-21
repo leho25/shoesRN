@@ -8,6 +8,7 @@ import Login from './Login/login';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Cart from './Cart/cart';
+import Register from './Register/register';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const MainScreen = () => {
@@ -46,10 +47,15 @@ const MainScreen = () => {
 const Index = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
           options={{headerShown: false}}
         />
         <Stack.Screen
