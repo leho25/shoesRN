@@ -2,22 +2,24 @@ import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {style} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../redux/apiRequests';
 
 const Login = ({navigation}) => {
   // const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const msg = useSelector(state => state.auth.msg);
   const dispatch = useDispatch();
   const handleLogin = () => {
     const newUser = {
       username: username,
       password: password,
     };
-    const loginUser = login(newUser);
-    dispatch(loginUser);
-    navigation.navigate('Main');
+    dispatch(login(newUser))
+      .unwrap()
+      .then(() => navigation.navigate('Main'))
+      .catch(er => er);
   };
   return (
     <View style={style.main}>
@@ -40,6 +42,7 @@ const Login = ({navigation}) => {
           style={style.textInputLogin}
           onChangeText={text => setUsername(text)}
           placeholder="Enter Username"
+          value={username}
         />
       </View>
       <View style={style.containerTextInput}>
@@ -48,6 +51,7 @@ const Login = ({navigation}) => {
           style={style.textInputLogin}
           onChangeText={text => setPassword(text)}
           placeholder="Enter Password"
+          value={password}
         />
       </View>
       <View style={style.containerForgotPassword}>
@@ -55,9 +59,7 @@ const Login = ({navigation}) => {
         <Text style={style.textForgotPassword}>Forgot Password</Text>
       </View>
       <View style={style.containerLogin}>
-        <TouchableOpacity
-          style={style.btnLogin}
-          onPress={handleLogin}>
+        <TouchableOpacity style={style.btnLogin} onPress={handleLogin}>
           <Text style={style.textLogin}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -71,6 +73,7 @@ const Login = ({navigation}) => {
           <Text style={style.textSignUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>
+      <Text>{msg}</Text>
     </View>
   );
 };

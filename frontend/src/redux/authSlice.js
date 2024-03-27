@@ -14,6 +14,7 @@ export const authSlice = createSlice({
       error: false,
       success: false,
     },
+    msg: '',
   },
   extraReducers: builders => {
     builders.addCase(login.pending, state => {
@@ -23,9 +24,10 @@ export const authSlice = createSlice({
       state.isFetching = false;
       state.currentUser = action.payload;
     });
-    builders.addCase(login.rejected, state => {
+    builders.addCase(login.rejected, (state,action) => {
       state.isFetching = false;
       state.error = true;
+      state.msg = action.payload;
     });
     builders.addCase(register.pending, state => {
       state.pending = true;
