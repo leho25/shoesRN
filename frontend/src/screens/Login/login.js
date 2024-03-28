@@ -64,13 +64,12 @@ const Login = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={style.containerSignUp}>
-        <Text style={style.textAccount}>Don't have an account?</Text>
         <TouchableOpacity
           style={style.btnSignUp}
           onPress={() => {
             navigation.navigate('Register');
           }}>
-          <Text style={style.textSignUp}>Sign Up</Text>
+          <Text style={style.textSignUp}>Don't have an account? Sign Up</Text>
         </TouchableOpacity>
       </View>
       <Text>{msg}</Text>

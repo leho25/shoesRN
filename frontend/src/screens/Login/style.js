@@ -73,7 +73,6 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-  textAccount: {fontSize: 16, fontWeight: '500', color: 'black'},
   btnSignUp: {marginLeft: 5},
   textSignUp: {
     fontSize: 16,

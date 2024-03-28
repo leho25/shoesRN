@@ -23,10 +23,17 @@ export const login = createAsyncThunk(
     }
   },
 );
-export const register = createAsyncThunk('register', async user => {
-  const res = await axios.post(
-    'http://192.168.1.157:3000/v1/auth/register',
-    user,
-  );
-  return res.data;
-});
+export const register = createAsyncThunk(
+  'register',
+  async (user, {rejectWithValue}) => {
+    try {
+      const res = await axios.post(
+        'http://192.168.1.157:3000/v1/auth/register',
+        user,
+      );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

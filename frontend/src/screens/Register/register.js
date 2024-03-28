@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {style} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../../redux/apiRequests';
 
 const Register = ({navigation}) => {
@@ -16,14 +23,18 @@ const Register = ({navigation}) => {
       email: email,
       password: password,
     };
-    dispatch(register(newUser));
+    dispatch(register(newUser))
+      .unwrap()
+      .then(() => {
+        navigation.goBack();
+      })
+      .catch(er => alert(er));
   };
   return (
     <View style={style.main}>
       <View style={style.containTitle}>
         <Text style={style.textTitle}>Register</Text>
       </View>
-
       <View style={style.containerImage}>
         <Image
           source={{
@@ -67,11 +78,10 @@ const Register = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={style.containerRegister}>
-        <Text style={style.textAccount}>Already have an account?</Text>
         <TouchableOpacity
           style={style.btnSignIn}
           onPress={() => navigation.goBack()}>
-          <Text style={style.textSignIn}>Sign In</Text>
+          <Text style={style.textSignIn}>Already have an account? Sign In</Text>
         </TouchableOpacity>
       </View>
     </View>

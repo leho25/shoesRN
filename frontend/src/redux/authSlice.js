@@ -15,6 +15,7 @@ export const authSlice = createSlice({
       success: false,
     },
     msg: '',
+    msgRegister:''
   },
   extraReducers: builders => {
     builders.addCase(login.pending, state => {
@@ -24,7 +25,7 @@ export const authSlice = createSlice({
       state.isFetching = false;
       state.currentUser = action.payload;
     });
-    builders.addCase(login.rejected, (state,action) => {
+    builders.addCase(login.rejected, (state, action) => {
       state.isFetching = false;
       state.error = true;
       state.msg = action.payload;
@@ -32,13 +33,15 @@ export const authSlice = createSlice({
     builders.addCase(register.pending, state => {
       state.pending = true;
     });
-    builders.addCase(register.fulfilled, state => {
+    builders.addCase(register.fulfilled, (state, action) => {
       state.isFetching = false;
       state.success = true;
+      state.msgRegister = action.payload;
     });
-    builders.addCase(register.rejected, state => {
+    builders.addCase(register.rejected, (state, action) => {
       state.isFetching = false;
       state.error = true;
+      state.msgRegister = action.payload;
     });
   },
 });

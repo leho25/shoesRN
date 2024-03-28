@@ -7,20 +7,26 @@ const authController = {
   //REGISTER
   register: async (req, res) => {
     try {
+      const checkUserName = await User.findOne({
+        username: req.body.username,
+      });
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(req.body.password, salt);
-
       //Create new user
       const newUser = await new User({
         username: req.body.username,
         email: req.body.email,
         password: hashed,
       });
+      //Check username and email already exist
+      if (checkUserName.username || checkUserName.email) {
+        return res.status(404).json("Username or email existed");
+      }
       //Save to db
       const user = await newUser.save();
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
 
@@ -108,11 +114,13 @@ const authController = {
     });
   },
   //LOG OUT
-  userLogout: async(req,res)=>{
+  userLogout: async (req, res) => {
     res.clearCookie("refreshToken");
-    refreshTokens = refreshTokens.filter((token)=>token !== req.cookies.refreshToken);
-    res.status(200).json("logged out!")
-  }
+    refreshTokens = refreshTokens.filter(
+      (token) => token !== req.cookies.refreshToken
+    );
+    res.status(200).json("logged out!");
+  },
 };
 
 module.exports = authController;
