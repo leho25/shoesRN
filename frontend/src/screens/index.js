@@ -7,8 +7,10 @@ import HomeDetail from './HomeDetail/homeDelail';
 import Login from './Login/login';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Cart from './Cart/cart';
 import Register from './Register/register';
+import Profile from './Profile/profile';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const MainScreen = () => {
@@ -22,9 +24,15 @@ const MainScreen = () => {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Cart') {
             iconName = focused ? 'cart' : 'cart-outline';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'user-circle-o' : 'user-circle';
           }
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return route.name === 'Profile' ? (
+            <FontAwesome name={iconName} size={size} color={color} />
+          ) : (
+            <Ionicons name={iconName} size={size} color={color} />
+          );
         },
       })}>
       <Tab.Screen
@@ -37,6 +45,13 @@ const MainScreen = () => {
       <Tab.Screen
         name="Cart"
         component={Cart}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
         options={{
           headerShown: false,
         }}

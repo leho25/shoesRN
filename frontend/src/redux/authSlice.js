@@ -15,7 +15,7 @@ export const authSlice = createSlice({
       success: false,
     },
     msg: '',
-    msgRegister:''
+    msgRegister: '',
   },
   extraReducers: builders => {
     builders.addCase(login.pending, state => {

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {style} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../redux/apiRequests';
+import {useNavigation} from '@react-navigation/native';
 
-const Login = ({navigation}) => {
-  // const navigation = useNavigation();
+const Login = () => {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const msg = useSelector(state => state.auth.msg);
@@ -26,7 +27,6 @@ const Login = ({navigation}) => {
       <View style={style.containTitle}>
         <Text style={style.textTitle}>Login</Text>
       </View>
-
       <View style={style.containerImage}>
         <Image
           source={{

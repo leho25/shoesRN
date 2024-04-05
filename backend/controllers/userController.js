@@ -9,13 +9,13 @@ const userController = {
       res.status(500).json(error);
     }
   },
-  deleteUser: async (req,res)=>{
+  deleteUser: async (req, res) => {
     try {
-        const deleteUser = await User.findById(req.params.id);
-        res.status(200).json("delete success")
+      const deleteUser = await User.findById(req.params.id);
+      res.status(200).json("delete success");
     } catch (error) {
-        res.status(500).json(error);
+      res.status(500).json(error);
     }
-  }
+  },
 };
 module.exports = userController;

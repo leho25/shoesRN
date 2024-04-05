@@ -11,8 +11,10 @@ import {style} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../../redux/apiRequests';
+import {useNavigation} from '@react-navigation/native';
 
-const Register = ({navigation}) => {
+const Register = () => {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

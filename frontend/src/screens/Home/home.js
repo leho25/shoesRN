@@ -4,10 +4,10 @@ import style from './style';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAllShoes} from '../../redux/apiRequests';
 import CardShoes from './cardShoes';
-
 const Home = () => {
   const dispatch = useDispatch();
   const shoes = useSelector(state => state.shoes);
+  console.log(shoes)
   useEffect(() => {
     dispatch(getAllShoes());
   }, []);
