@@ -5,6 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../redux/apiRequests';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -12,15 +13,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const msg = useSelector(state => state.auth.msg);
   const dispatch = useDispatch();
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const newUser = {
       username: username,
       password: password,
     };
-    dispatch(login(newUser))
-      .unwrap()
-      .then(() => navigation.navigate('Main'))
-      .catch(er => er);
+    try {
+      const res = await dispatch(login(newUser)).unwrap();
+      console.log(res);
+      await AsyncStorage.setItem('payload', res._id);
+      console.log('sss');
+      navigation.navigate("Main")
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
   return (
     <View style={style.main}>
