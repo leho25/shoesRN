@@ -9,4 +9,5 @@ router.delete(
   middlewareController.verifyTokenAndAdminAuth,
   userController.deleteUser
 );
+router.get("/:id", userController.getUser);
 module.exports = router;

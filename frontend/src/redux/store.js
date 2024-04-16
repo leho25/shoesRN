@@ -24,7 +24,7 @@ const rootReducer = combineSlices({
   shoes: shoesReducer,
   aPairOfShoes: aPairOfShoesReducer,
   auth: authReducer,
-  user: userReducer,
+  users: userReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

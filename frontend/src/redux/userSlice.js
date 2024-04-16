@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getAllUser} from './apiRequests';
+import {getAllUser, getUser} from './apiRequests';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: {
-      getCurrentUser: null,
+      getCurrentUser: [],
       isLoading: false,
       error: false,
     },

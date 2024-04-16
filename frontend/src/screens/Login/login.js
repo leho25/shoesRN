@@ -21,7 +21,7 @@ const Login = () => {
     try {
       const res = await dispatch(login(newUser)).unwrap();
       console.log(res);
-      await AsyncStorage.setItem('payload', res._id);
+      await AsyncStorage.setItem('payload', res.accessToken);
       console.log('sss');
       navigation.navigate("Main")
     } catch (error) {
