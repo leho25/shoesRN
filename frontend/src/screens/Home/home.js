@@ -9,7 +9,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = () => {
   const dispatch = useDispatch();
   const shoes = useSelector(state => state.shoes);
-  console.log(shoes);
   // const data = useSelector(state => state.users.user.getCurrentUser);
   // console.log(data);
 

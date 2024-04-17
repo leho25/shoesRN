@@ -20,10 +20,10 @@ const Login = () => {
     };
     try {
       const res = await dispatch(login(newUser)).unwrap();
-      console.log(res);
-      await AsyncStorage.setItem('payload', res.accessToken);
-      console.log('sss');
-      navigation.navigate("Main")
+      console.log(res.accessToken);
+      await AsyncStorage.setItem('accessToken', res.accessToken);
+      await AsyncStorage.setItem('userId', res._id);
+      navigation.navigate('Main');
     } catch (error) {
       console.error('Error:', error);
     }

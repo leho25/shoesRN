@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { aPairOfShoes } from './apiRequests';
+import {aPairOfShoes} from './apiRequests';
 
 const aPairOfShoesSlice = createSlice({
   name: 'aPairOfShoes',
