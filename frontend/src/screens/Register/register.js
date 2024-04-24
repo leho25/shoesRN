@@ -27,10 +27,11 @@ const Register = () => {
     };
     dispatch(register(newUser))
       .unwrap()
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         navigation.goBack();
       })
-      .catch(er => alert(er));
+      .catch(er => console.log(er));
   };
   return (
     <View style={style.main}>

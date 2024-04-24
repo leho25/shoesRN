@@ -62,7 +62,7 @@ const MainScreen = () => {
 const Index = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Main">
         <Stack.Screen
           name="Login"
           component={Login}

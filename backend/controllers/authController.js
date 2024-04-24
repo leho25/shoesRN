@@ -10,6 +10,7 @@ const authController = {
       const checkUserName = await User.findOne({
         username: req.body.username,
       });
+      // console.log(checkUserName);
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(req.body.password, salt);
       //Create new user
@@ -18,6 +19,7 @@ const authController = {
         email: req.body.email,
         password: hashed,
       });
+      console.log(newUser);
       //Check username and email already exist
       if (checkUserName.username || checkUserName.email) {
         return res.status(404).json("Username or email existed");
@@ -26,7 +28,7 @@ const authController = {
       const user = await newUser.save();
       res.status(200).json(user);
     } catch (error) {
-      return res.status(500).json(error);
+      return console.log(error);
     }
   },
 
@@ -39,7 +41,7 @@ const authController = {
       },
       process.env.JWT_ACCESS_KEY,
       {
-        expiresIn: "20s",
+        expiresIn: "60s",
       }
     );
   },

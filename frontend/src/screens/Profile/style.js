@@ -15,7 +15,7 @@ export const style = StyleSheet.create({
     shadowRadius: 16.0,
     elevation: 4,
   },
-  textTitle: {fontSize: 32, fontWeight: '500',color:'black'},
+  textTitle: {fontSize: 32, fontWeight: '500', color: 'black'},
   containerImageAvatar: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,5 +27,22 @@ export const style = StyleSheet.create({
     borderRadius: 150 / 2,
     overflow: 'hidden',
     borderWidth: 3,
+  },
+  userInfor: {flex: 1, alignItems: 'center'},
+  textInfor: {fontSize: 26, color: 'black', fontWeight: 'bold'},
+  btnLogout: {
+    width: '50%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 6,
+    backgroundColor: 'red',
+  },
+  textBtnLogout: {fontSize: 26, fontWeight: '500', color: 'black'},
+  containerBtnLogout: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 150,
   },
 });

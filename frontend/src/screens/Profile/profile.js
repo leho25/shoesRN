@@ -7,11 +7,9 @@ import {getUser} from '../../redux/apiRequests';
 const Profile = () => {
   const dispatch = useDispatch();
   const userDetail = useSelector(state => state.userDetails.userDetail);
-  console.log('userDetail', userDetail);
   const getProfile = async () => {
     const accessToken = await AsyncStorage.getItem('accessToken');
     const userId = await AsyncStorage.getItem('userId');
-    console.log(accessToken)
     dispatch(getUser(userId));
   };
   useEffect(() => {
@@ -30,30 +28,12 @@ const Profile = () => {
           />
         </View>
       </View>
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text style={{fontSize: 26, color: 'black', fontWeight: 'bold'}}>
-          {userDetail.getUser.username}
-        </Text>
+      <View style={style.userInfor}>
+        <Text style={style.textInfor}>{userDetail.getUser?.username}</Text>
       </View>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 150,
-        }}>
-        <TouchableOpacity
-          style={{
-            width: '50%',
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderWidth: 1,
-            borderRadius: 6,
-            backgroundColor: 'red',
-          }}>
-          <Text style={{fontSize: 26, fontWeight: '500', color: 'black'}}>
-            Log out
-          </Text>
+      <View style={style.containerBtnLogout}>
+        <TouchableOpacity style={style.btnLogout}>
+          <Text style={style.textBtnLogout}>Log out</Text>
         </TouchableOpacity>
       </View>
     </View>
