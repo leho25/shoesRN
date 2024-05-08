@@ -12,6 +12,9 @@ const HomeDetail = ({route, navigation}) => {
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
+  // const addToCart = item => {
+  //   dispatch(addToCart(item));
+  // };
   return (
     <View style={style.main}>
       <View style={style.headerTitle}>

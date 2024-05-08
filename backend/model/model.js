@@ -34,6 +34,9 @@ const shoesSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  stock: {
+    type: Number,
+  },
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Brand",
