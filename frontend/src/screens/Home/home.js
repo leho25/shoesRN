@@ -37,6 +37,7 @@ const Home = () => {
                     price={item.price}
                     image={item.image}
                     _id={item._id}
+                    item={item}
                   />
                 </View>
               );

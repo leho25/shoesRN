@@ -4,7 +4,7 @@ import style from './style';
 import {useNavigation} from '@react-navigation/native';
 
 const CardShoes = props => {
-  const {name, _id, price, image} = props;
+  const {name, _id, price, image, item} = props;
   const navigation = useNavigation();
   return (
     <View style={style.cardShoes}>
@@ -17,7 +17,7 @@ const CardShoes = props => {
         activeOpacity={0.8}
         style={style.btnCart}
         onPress={() => {
-          navigation.navigate('HomeDetail', {id: _id});
+          navigation.navigate('HomeDetail', {id: _id, item: item});
         }}>
         <Text style={style.btnTitleCart}>Thêm vào giỏ hàng</Text>
       </TouchableOpacity>

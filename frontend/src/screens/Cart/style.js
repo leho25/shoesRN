@@ -98,7 +98,7 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
-  textOrder: {fontSize: 24, color: 'white', fontWeight: '500'},
+  textOrder: {fontSize: 20, color: 'white', fontWeight: '500'},
   btnOrder: {
     flex: 1,
     backgroundColor: 'blue',

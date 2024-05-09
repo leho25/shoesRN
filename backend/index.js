@@ -29,7 +29,7 @@ app.use("/v1/shoes", shoesRouter);
 app.use("/v1/auth", authRouter);
 app.use("/v1/user", userRouter);
 
-app.listen("3000", "192.168.1.2", () => {
+app.listen("3000", "192.168.1.4", () => {
   console.log(`Service is running`);
 });
 

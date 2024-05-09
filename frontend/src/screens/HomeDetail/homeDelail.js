@@ -4,17 +4,21 @@ import {useDispatch, useSelector} from 'react-redux';
 import {aPairOfShoes} from '../../redux/apiRequests';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import style from './style';
+import {addToCart} from '../../redux/cartSlice';
 
 const HomeDetail = ({route, navigation}) => {
-  const {id} = route.params;
+  const {id, item} = route.params;
+  console.log(item);
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
+  const cart = useSelector(state => state.cart.cart);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
-  // const addToCart = item => {
-  //   dispatch(addToCart(item));
-  // };
+  const addItemToCart = item => {
+    dispatch(addToCart(item));
+  };
+  console.log('cart', cart);
   return (
     <View style={style.main}>
       <View style={style.headerTitle}>
@@ -60,9 +64,7 @@ const HomeDetail = ({route, navigation}) => {
           </View>
           <TouchableOpacity
             style={style.btnAddCart}
-            onPress={() => {
-              console.log('Add Cart');
-            }}>
+            onPress={() => addItemToCart(item)}>
             <Text style={style.btnTextAddCart}>Thêm Vào Giỏ Hàng</Text>
           </TouchableOpacity>
         </View>
