@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "order",
+    },
   },
   { timestamps: true }
 );

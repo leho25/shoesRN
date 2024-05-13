@@ -2,11 +2,18 @@ import React, {useEffect} from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {style} from './style';
-import {decrementQuality, incrementQuality, removeFromCart} from '../../redux/cartSlice';
+import {
+  decrementQuality,
+  incrementQuality,
+  removeFromCart,
+} from '../../redux/cartSlice';
+import {order} from '../../redux/apiRequests';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Cart = () => {
-  const cart = useSelector(state => state.cart.cart);
+  const cart = useSelector(state => state.carts.cart);
   const dispatch = useDispatch();
+
   const total = cart
     ?.map(item => item.price * item.quality)
     .reduce((current, prev) => {
@@ -20,6 +27,19 @@ const Cart = () => {
   };
   const removedItemCart = item => {
     dispatch(removeFromCart(item));
+  };
+  const handlePlaceOrder = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userId');
+      const orderData = {
+        userId: userId,
+        cartsItem: cart,
+        totalPrice: total,
+      };
+      await dispatch(order(orderData));
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <View style={style.main}>
@@ -57,7 +77,9 @@ const Cart = () => {
                 </TouchableOpacity>
               </View>
               <View style={style.containerBtnRemove}>
-                <TouchableOpacity style={style.btnRemove} onPress={()=>removedItemCart(item)}>
+                <TouchableOpacity
+                  style={style.btnRemove}
+                  onPress={() => removedItemCart(item)}>
                   <Text style={style.textInforCart}>Remove</Text>
                 </TouchableOpacity>
               </View>
@@ -69,9 +91,9 @@ const Cart = () => {
         <View style={style.totalPrice}>
           <Text style={style.textOrder}>Total: {total} VNĐ</Text>
         </View>
-        <View style={style.btnOrder}>
+        <TouchableOpacity style={style.btnOrder} onPress={handlePlaceOrder}>
           <Text style={style.textOrder}>Đặt Hàng</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

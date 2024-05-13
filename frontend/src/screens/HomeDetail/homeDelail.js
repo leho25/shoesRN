@@ -8,10 +8,9 @@ import {addToCart} from '../../redux/cartSlice';
 
 const HomeDetail = ({route, navigation}) => {
   const {id, item} = route.params;
-  console.log(item);
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
-  const cart = useSelector(state => state.cart.cart);
+  const cart = useSelector(state => state.carts.cart);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);

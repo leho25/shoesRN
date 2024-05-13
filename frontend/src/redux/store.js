@@ -28,7 +28,7 @@ const rootReducer = combineSlices({
   auth: authReducer,
   users: userReducer,
   userDetails: userDetailReducer,
-  cart: createReducer,
+  carts: createReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
