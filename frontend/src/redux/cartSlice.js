@@ -7,6 +7,11 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
+      if (!Array.isArray(state.cart)) {
+        state.cart = [];
+        console.log('Before addItem:', state.cart);
+      }
+
       const itemPresent = state.cart.find(
         item => item.id === action.payload.id,
       );

@@ -7,10 +7,10 @@ const authController = {
   //REGISTER
   register: async (req, res) => {
     try {
-      const checkUserName = await User.findOne({
+      const checkUserName = await User.find({
         username: req.body.username,
       });
-      // console.log(checkUserName);
+      console.log(checkUserName);
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(req.body.password, salt);
       //Create new user
@@ -19,7 +19,6 @@ const authController = {
         email: req.body.email,
         password: hashed,
       });
-      console.log(newUser);
       //Check username and email already exist
       if (checkUserName.username || checkUserName.email) {
         return res.status(404).json("Username or email existed");

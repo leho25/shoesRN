@@ -4,7 +4,8 @@ import aPairOfShoesReducer from './aPairOfShoesSlice';
 import authReducer from './authSlice';
 import userReducer from './userSlice';
 import userDetailReducer from './userDetailSlice';
-import createReducer from './cartSlice';
+import cartReducer from './cartSlice';
+import orderReducer from './orderSlice';
 import {
   persistStore,
   persistReducer,
@@ -28,7 +29,8 @@ const rootReducer = combineSlices({
   auth: authReducer,
   users: userReducer,
   userDetails: userDetailReducer,
-  carts: createReducer,
+  carts: cartReducer,
+  orders: orderReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

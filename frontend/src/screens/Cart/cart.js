@@ -3,6 +3,7 @@ import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {style} from './style';
 import {
+  clearCart,
   decrementQuality,
   incrementQuality,
   removeFromCart,
@@ -13,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
   const dispatch = useDispatch();
-
+  console.log(cart);
   const total = cart
     ?.map(item => item.price * item.quality)
     .reduce((current, prev) => {
@@ -36,9 +37,11 @@ const Cart = () => {
         cartsItem: cart,
         totalPrice: total,
       };
+
       await dispatch(order(orderData));
+      await dispatch(clearCart());
     } catch (error) {
-      console.log(error);
+      console.log('error', error);
     }
   };
   return (

@@ -11,13 +11,13 @@ const HomeDetail = ({route, navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
   const cart = useSelector(state => state.carts.cart);
+  console.log(cart);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
   const addItemToCart = item => {
     dispatch(addToCart(item));
   };
-  console.log('cart', cart);
   return (
     <View style={style.main}>
       <View style={style.headerTitle}>

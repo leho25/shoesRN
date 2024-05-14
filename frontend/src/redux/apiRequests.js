@@ -48,7 +48,7 @@ export const register = createAsyncThunk(
   },
 );
 
-export const order = async orderData => {
+export const order = createAsyncThunk('order', async orderData => {
   const res = await axios.post('http://192.168.1.5:3000/v1/orders', orderData);
   return res.data;
-};
+});
