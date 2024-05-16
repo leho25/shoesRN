@@ -9,7 +9,8 @@ const brandRouter = require("./routes/brand");
 const shoesRouter = require("./routes/shoes");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
-const orderRouter = require("./routes/order")
+const orderRouter = require("./routes/order");
+const cartRouter = require("./routes/cart");
 dotenv.config();
 //CONNECT DATABASE
 const connectToMongo = async () => {
@@ -29,7 +30,8 @@ app.use("/v1/shoes", shoesRouter);
 
 app.use("/v1/auth", authRouter);
 app.use("/v1/user", userRouter);
-app.use("/v1/orders",orderRouter)
+app.use("/v1/orders", orderRouter);
+app.use("/v1/cart", cartRouter);
 
 app.listen("3000", "192.168.1.5", () => {
   console.log(`Service is running`);

@@ -52,3 +52,8 @@ export const order = createAsyncThunk('order', async orderData => {
   const res = await axios.post('http://192.168.1.5:3000/v1/orders', orderData);
   return res.data;
 });
+
+export const cartUser = createAsyncThunk('cartUser', async userId => {
+  const res = await axios.get(`http://192.168.1.5:3000/v1/cart/${userId}`);
+  return res.data;
+});

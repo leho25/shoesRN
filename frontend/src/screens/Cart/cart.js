@@ -8,13 +8,21 @@ import {
   incrementQuality,
   removeFromCart,
 } from '../../redux/cartSlice';
-import {order} from '../../redux/apiRequests';
+import {cartUser, order} from '../../redux/apiRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
+  console.log('cart', cart);
+  const listCartUser = useSelector(state => state.cartUsers.cartUser);
+  console.log('listCartUser', listCartUser);
+  const userDetail = useSelector(state => state.userDetails.userDetail);
+  const userId = userDetail.getUser._id;
+  console.log('userId', userId);
+  useEffect(() => {
+    dispatch(cartUser(userId));
+  }, []);
   const dispatch = useDispatch();
-  console.log(cart);
   const total = cart
     ?.map(item => item.price * item.quality)
     .reduce((current, prev) => {
@@ -37,7 +45,6 @@ const Cart = () => {
         cartsItem: cart,
         totalPrice: total,
       };
-
       await dispatch(order(orderData));
       await dispatch(clearCart());
     } catch (error) {
@@ -50,16 +57,21 @@ const Cart = () => {
         <Text style={style.textTitle}>Cart</Text>
       </View>
       <View style={style.containerListCart}>
-        {cart.map((item, index) => {
+        {listCartUser?.product.map((item, index) => {
           return (
             <View style={style.insideContainerListCart} key={index}>
-              <Image source={{uri: item.image}} style={style.imageListCart} />
+              <Image
+                source={{uri: item.productId.image}}
+                style={style.imageListCart}
+              />
               <View style={style.containerInforCart}>
                 <View style={style.containerName}>
-                  <Text style={style.textInforCart}>{item.name}</Text>
+                  <Text style={style.textInforCart}>{item.productId.name}</Text>
                 </View>
                 <View style={style.containerPrice}>
-                  <Text style={style.textInforCart}>{item.price}</Text>
+                  <Text style={style.textInforCart}>
+                    {item.productId.price}
+                  </Text>
                 </View>
               </View>
               <View style={style.containerInDe}>
@@ -71,7 +83,9 @@ const Cart = () => {
                   <Text style={style.textInforCart}>-</Text>
                 </TouchableOpacity>
                 <View style={style.containerNumberItem}>
-                  <Text style={style.textInforCart}>{item.quality}</Text>
+                  <Text style={style.textInforCart}>
+                    {item.productId.quality}
+                  </Text>
                 </View>
                 <TouchableOpacity
                   style={style.containerIncrement}

@@ -10,13 +10,19 @@ const HomeDetail = ({route, navigation}) => {
   const {id, item} = route.params;
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
+  const userDetail = useSelector(state => state.userDetails.userDetail);
+  console.log('userDetail', userDetail);
   const cart = useSelector(state => state.carts.cart);
   console.log(cart);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
+
   const addItemToCart = item => {
-    dispatch(addToCart(item));
+    if (userDetail.getUser._id) {
+      const _id = userDetail.getUser._id;
+      dispatch(addToCart(item));
+    }
   };
   return (
     <View style={style.main}>

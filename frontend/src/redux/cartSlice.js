@@ -11,10 +11,10 @@ export const cartSlice = createSlice({
         state.cart = [];
         console.log('Before addItem:', state.cart);
       }
-
       const itemPresent = state.cart.find(
         item => item.id === action.payload.id,
       );
+
       if (itemPresent) {
         itemPresent.quality++;
       } else {
