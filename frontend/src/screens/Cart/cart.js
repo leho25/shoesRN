@@ -8,35 +8,18 @@ import {
   incrementQuality,
   removeFromCart,
 } from '../../redux/cartSlice';
-import {cartUser, order} from '../../redux/apiRequests';
+import {cartUser, getUser, order} from '../../redux/apiRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
-  console.log('cart', cart);
   const listCartUser = useSelector(state => state.cartUsers.cartUser);
-  console.log('listCartUser', listCartUser);
   const userDetail = useSelector(state => state.userDetails.userDetail);
   const userId = userDetail.getUser._id;
-  console.log('userId', userId);
   useEffect(() => {
     dispatch(cartUser(userId));
   }, []);
   const dispatch = useDispatch();
-  const total = cart
-    ?.map(item => item.price * item.quality)
-    .reduce((current, prev) => {
-      return current + prev;
-    }, 0);
-  const incrementQualityCart = item => {
-    dispatch(incrementQuality(item));
-  };
-  const decrementQualityCart = item => {
-    dispatch(decrementQuality(item));
-  };
-  const removedItemCart = item => {
-    dispatch(removeFromCart(item));
-  };
   const handlePlaceOrder = async () => {
     try {
       const userId = await AsyncStorage.getItem('userId');
@@ -46,7 +29,6 @@ const Cart = () => {
         totalPrice: total,
       };
       await dispatch(order(orderData));
-      await dispatch(clearCart());
     } catch (error) {
       console.log('error', error);
     }
@@ -83,9 +65,7 @@ const Cart = () => {
                   <Text style={style.textInforCart}>-</Text>
                 </TouchableOpacity>
                 <View style={style.containerNumberItem}>
-                  <Text style={style.textInforCart}>
-                    {item.productId.quality}
-                  </Text>
+                  <Text style={style.textInforCart}>{item.quality}</Text>
                 </View>
                 <TouchableOpacity
                   style={style.containerIncrement}
@@ -106,7 +86,7 @@ const Cart = () => {
       </View>
       <View style={style.containerOrder}>
         <View style={style.totalPrice}>
-          <Text style={style.textOrder}>Total: {total} VNĐ</Text>
+          <Text style={style.textOrder}>Total: VNĐ</Text>
         </View>
         <TouchableOpacity style={style.btnOrder} onPress={handlePlaceOrder}>
           <Text style={style.textOrder}>Đặt Hàng</Text>

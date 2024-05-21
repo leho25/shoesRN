@@ -1,28 +1,28 @@
 import React, {useEffect} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {aPairOfShoes} from '../../redux/apiRequests';
+import {aPairOfShoes, addToCart} from '../../redux/apiRequests';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import style from './style';
-import {addToCart} from '../../redux/cartSlice';
 
 const HomeDetail = ({route, navigation}) => {
   const {id, item} = route.params;
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
   const userDetail = useSelector(state => state.userDetails.userDetail);
-  console.log('userDetail', userDetail);
-  const cart = useSelector(state => state.carts.cart);
-  console.log(cart);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
-
-  const addItemToCart = item => {
-    if (userDetail.getUser._id) {
-      const _id = userDetail.getUser._id;
-      dispatch(addToCart(item));
-    }
+  const addItemToCart = () => {
+    const product = {
+      productId: id,
+      quality: 1,
+    };
+    const newCart = {
+      userId: userDetail.getUser._id,
+      product: product,
+    };
+    dispatch(addToCart(newCart));
   };
   return (
     <View style={style.main}>

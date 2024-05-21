@@ -1,4 +1,5 @@
 const Cart = require("../model/cart");
+const { Shoes } = require("../model/model");
 
 const cartController = {
   getUserCart: async (req, res) => {
@@ -13,12 +14,12 @@ const cartController = {
     }
   },
   addToCart: async (req, res) => {
-    const newCart = new Cart(req.body);
     try {
+      const newCart = new Cart(req.body);
       const savedCart = await newCart.save();
       res.status(200).json(savedCart);
     } catch (error) {
-      res.status(500).json(error);
+      console.log("error", error);
     }
   },
   getAllUser: async (req, res) => {

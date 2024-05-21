@@ -33,7 +33,7 @@ app.use("/v1/user", userRouter);
 app.use("/v1/orders", orderRouter);
 app.use("/v1/cart", cartRouter);
 
-app.listen("3000", "192.168.1.5", () => {
+app.listen("3000", "10.10.55.54", () => {
   console.log(`Service is running`);
 });
 

@@ -8,7 +8,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const userDetail = useSelector(state => state.userDetails.userDetail);
   const getProfile = async () => {
-    const accessToken = await AsyncStorage.getItem('accessToken');
     const userId = await AsyncStorage.getItem('userId');
     dispatch(getUser(userId));
   };
