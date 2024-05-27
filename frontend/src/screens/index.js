@@ -11,6 +11,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Cart from './Cart/cart';
 import Register from './Register/register';
 import Profile from './Profile/profile';
+import Admin from './Admin/admin';
+import ManagerCart from './ManageCart/ManageCart';
+import ManagerProduct from './ManageProduct/ManageProduct';
+import ManagerOrder from './ManageOrder/ManageOrder';
+import ManagerUser from './ManageUser/ManageUser';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const MainScreen = () => {
@@ -62,7 +67,7 @@ const MainScreen = () => {
 const Index = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Admin">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -81,6 +86,31 @@ const Index = () => {
         <Stack.Screen
           name="HomeDetail"
           component={HomeDetail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Admin"
+          component={Admin}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ManageCart"
+          component={ManagerCart}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ManageProduct"
+          component={ManagerProduct}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ManageOrder"
+          component={ManagerOrder}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ManageUser"
+          component={ManagerUser}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

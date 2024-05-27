@@ -21,14 +21,21 @@ const Cart = () => {
     dispatch(getUser(userId));
   };
   useEffect(() => {
-    getProfile();
+    if (userId) {
+      getProfile();
+    } else {
+      console.log('Not login');
+    }
   }, []);
   useEffect(() => {
-    dispatch(cartUser(userId));
+    if (userId) {
+      dispatch(cartUser(userId));
+    }
   }, []);
   const total = cart
-    ?.map(item => item.item.price * item.quality)
-    .reduce((curr, prev) => curr + prev, 0);
+    .filter(item => item.userId !== userId)
+    .map(item => item.item.price * item.quality)
+    .reduce((pre, current) => pre + current, 0);
   console.log(total);
   const dispatch = useDispatch();
   const decrementQualityCart = item => {

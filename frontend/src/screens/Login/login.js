@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const msg = useSelector(state => state.auth.msg);
   const dispatch = useDispatch();
-  
+
   const handleLogin = async () => {
     const newUser = {
       username: username,
@@ -24,7 +24,11 @@ const Login = () => {
       console.log(res.accessToken);
       await AsyncStorage.setItem('accessToken', res.accessToken);
       await AsyncStorage.setItem('userId', res._id);
-      navigation.navigate('Main');
+      if (res.admin) {
+        navigation.navigate('Admin');
+      } else {
+        navigation.navigate('Main');
+      }
     } catch (error) {
       console.error('Error:', error);
     }

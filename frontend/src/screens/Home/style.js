@@ -6,10 +6,10 @@ export default style = StyleSheet.create({
   },
   bgTitle: {
     backgroundColor: 'white',
-    shadowColor:'#000',
-    shadowOffset:{
-      width:0,
-      height:3
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
@@ -49,18 +49,18 @@ export default style = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 7,
   },
-  btnCart:{
-    width:'90%',
-    backgroundColor:'red',
-    alignItems:'center',
-    height:40,
-    justifyContent:'center',
-    borderRadius:10,
-    marginTop:5
+  btnCart: {
+    width: '90%',
+    backgroundColor: 'red',
+    alignItems: 'center',
+    height: 40,
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginTop: 5,
   },
-  btnTitleCart:{
-    fontSize:16,
-    color:"white",
-    fontWeight:'600'
-  }
+  btnTitleCart: {
+    fontSize: 16,
+    color: 'white',
+    fontWeight: '600',
+  },
 });

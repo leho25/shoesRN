@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {aPairOfShoes, getUser} from '../../redux/apiRequests';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -19,7 +19,7 @@ const HomeDetail = ({route, navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
   const userDetail = useSelector(state => state.userDetails.userDetail);
-  console.log(userDetail.getUser);
+  console.log(userDetail.getUser._id);
   const userId = userDetail.getUser._id;
   const cart = useSelector(state => state.carts.cart);
   console.log('cart', cart);
@@ -34,13 +34,16 @@ const HomeDetail = ({route, navigation}) => {
     dispatch(aPairOfShoes(id));
   }, []);
   const addItemToCart = () => {
-    const newItem = {
-      item: item,
-      quality: quality,
-      userId: userId,
-    };
-    console.log('newItem', newItem);
-    dispatch(addToCart(newItem));
+    if (userId) {
+      const newItem = {
+        item: item,
+        quality: quality,
+        userId: userId,
+      };
+      dispatch(addToCart(newItem));
+    } else {
+      <Alert>Bạn Phải Đăng Nhập</Alert>;
+    }
   };
   return (
     <View style={style.main}>
