@@ -1,28 +1,46 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {aPairOfShoes, addToCart} from '../../redux/apiRequests';
+import {aPairOfShoes, getUser} from '../../redux/apiRequests';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import style from './style';
+import {addToCart} from '../../redux/cartSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeDetail = ({route, navigation}) => {
+  const [quality, setQuality] = useState(1);
+  const incerment = () => {
+    setQuality(quality + 1);
+  };
+  const decerment = () => {
+    setQuality(quality - 1);
+  };
   const {id, item} = route.params;
   const dispatch = useDispatch();
   const data = useSelector(state => state.aPairOfShoes);
   const userDetail = useSelector(state => state.userDetails.userDetail);
+  console.log(userDetail.getUser);
+  const userId = userDetail.getUser._id;
+  const cart = useSelector(state => state.carts.cart);
+  console.log('cart', cart);
+  const getProfile = async () => {
+    const userId = await AsyncStorage.getItem('userId');
+    dispatch(getUser(userId));
+  };
+  useEffect(() => {
+    getProfile();
+  }, []);
   useEffect(() => {
     dispatch(aPairOfShoes(id));
   }, []);
   const addItemToCart = () => {
-    const product = {
-      productId: id,
-      quality: 1,
+    const newItem = {
+      item: item,
+      quality: quality,
+      userId: userId,
     };
-    const newCart = {
-      userId: userDetail.getUser._id,
-      product: product,
-    };
-    dispatch(addToCart(newCart));
+    console.log('newItem', newItem);
+    dispatch(addToCart(newItem));
   };
   return (
     <View style={style.main}>
@@ -51,25 +69,19 @@ const HomeDetail = ({route, navigation}) => {
                 Price: {data.aPairOfShoes.price} VNĐ
               </Text>
               <View style={style.containBtnDecInc}>
-                <TouchableOpacity style={style.btnDecrease}>
+                <TouchableOpacity style={style.btnDecrease} onPress={decerment}>
                   <Text style={style.textDecrease}>-</Text>
                 </TouchableOpacity>
                 <View style={style.numberItem}>
-                  <Text style={style.textNumber}>1</Text>
+                  <Text style={style.textNumber}>{quality}</Text>
                 </View>
-                <TouchableOpacity
-                  style={style.btnIncrease}
-                  onPress={() => {
-                    console.log('+++++++++');
-                  }}>
+                <TouchableOpacity style={style.btnIncrease} onPress={incerment}>
                   <Text style={style.textIncrease}>+</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
-          <TouchableOpacity
-            style={style.btnAddCart}
-            onPress={() => addItemToCart(item)}>
+          <TouchableOpacity style={style.btnAddCart} onPress={addItemToCart}>
             <Text style={style.btnTextAddCart}>Thêm Vào Giỏ Hàng</Text>
           </TouchableOpacity>
         </View>

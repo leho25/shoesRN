@@ -13,13 +13,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
-  const listCartUser = useSelector(state => state.cartUsers.cartUser);
+  console.log('cart', cart);
   const userDetail = useSelector(state => state.userDetails.userDetail);
   const userId = userDetail.getUser._id;
+  const getProfile = async () => {
+    const userId = await AsyncStorage.getItem('userId');
+    dispatch(getUser(userId));
+  };
+  useEffect(() => {
+    getProfile();
+  }, []);
   useEffect(() => {
     dispatch(cartUser(userId));
   }, []);
+  const total = cart
+    ?.map(item => item.item.price * item.quality)
+    .reduce((curr, prev) => curr + prev, 0);
+  console.log(total);
   const dispatch = useDispatch();
+  const decrementQualityCart = item => {
+    dispatch(decrementQuality(item));
+  };
+  const incrementQualityCart = item => {
+    dispatch(incrementQuality(item));
+  };
+  const removedItemCart = item => {
+    dispatch(removeFromCart(item));
+  };
   const handlePlaceOrder = async () => {
     try {
       const userId = await AsyncStorage.getItem('userId');
@@ -39,54 +59,58 @@ const Cart = () => {
         <Text style={style.textTitle}>Cart</Text>
       </View>
       <View style={style.containerListCart}>
-        {listCartUser?.product.map((item, index) => {
+        {cart.map((item, index) => {
           return (
-            <View style={style.insideContainerListCart} key={index}>
-              <Image
-                source={{uri: item.productId.image}}
-                style={style.imageListCart}
-              />
-              <View style={style.containerInforCart}>
-                <View style={style.containerName}>
-                  <Text style={style.textInforCart}>{item.productId.name}</Text>
+            <View key={index}>
+              {item.userId === userId ? (
+                <View style={style.insideContainerListCart}>
+                  {item.item.image ? (
+                    <Image
+                      source={{uri: item.item.image}}
+                      style={style.imageListCart}
+                    />
+                  ) : null}
+                  <View style={style.containerInforCart}>
+                    <View style={style.containerName}>
+                      <Text style={style.textInforCart}>{item.item.name}</Text>
+                    </View>
+                    <View style={style.containerPrice}>
+                      <Text style={style.textInforCart}>{item.item.price}</Text>
+                    </View>
+                  </View>
+                  <View style={style.containerInDe}>
+                    <TouchableOpacity
+                      style={style.containerDecrement}
+                      onPress={() => {
+                        decrementQualityCart(item);
+                      }}>
+                      <Text style={style.textInforCart}>-</Text>
+                    </TouchableOpacity>
+                    <View style={style.containerNumberItem}>
+                      <Text style={style.textInforCart}>{item.quality}</Text>
+                    </View>
+                    <TouchableOpacity
+                      style={style.containerIncrement}
+                      onPress={() => incrementQualityCart(item)}>
+                      <Text style={style.textInforCart}>+</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={style.containerBtnRemove}>
+                    <TouchableOpacity
+                      style={style.btnRemove}
+                      onPress={() => removedItemCart(item)}>
+                      <Text style={style.textInforCart}>Remove</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <View style={style.containerPrice}>
-                  <Text style={style.textInforCart}>
-                    {item.productId.price}
-                  </Text>
-                </View>
-              </View>
-              <View style={style.containerInDe}>
-                <TouchableOpacity
-                  style={style.containerDecrement}
-                  onPress={() => {
-                    decrementQualityCart(item);
-                  }}>
-                  <Text style={style.textInforCart}>-</Text>
-                </TouchableOpacity>
-                <View style={style.containerNumberItem}>
-                  <Text style={style.textInforCart}>{item.quality}</Text>
-                </View>
-                <TouchableOpacity
-                  style={style.containerIncrement}
-                  onPress={() => incrementQualityCart(item)}>
-                  <Text style={style.textInforCart}>+</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={style.containerBtnRemove}>
-                <TouchableOpacity
-                  style={style.btnRemove}
-                  onPress={() => removedItemCart(item)}>
-                  <Text style={style.textInforCart}>Remove</Text>
-                </TouchableOpacity>
-              </View>
+              ) : null}
             </View>
           );
         })}
       </View>
       <View style={style.containerOrder}>
         <View style={style.totalPrice}>
-          <Text style={style.textOrder}>Total: VNĐ</Text>
+          <Text style={style.textOrder}>Total: {total} VNĐ</Text>
         </View>
         <TouchableOpacity style={style.btnOrder} onPress={handlePlaceOrder}>
           <Text style={style.textOrder}>Đặt Hàng</Text>

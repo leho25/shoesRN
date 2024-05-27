@@ -13,7 +13,7 @@ const orderController = {
       //create an array of product objects from the cart Items
       const products = cartsItem.map((item) => ({
         quality: item.quality,
-        productId: item._id,
+        productId: item.item._id,
       }));
       //create a new Order
       const order = await new Order({
