@@ -42,6 +42,18 @@ const PostProduct = () => {
           </View>
         </View>
         <View style={style.containerInsideTextinput}>
+          <Text style={style.labelText}>Image</Text>
+          <View style={style.viewTextinput}>
+            <TextInput style={style.textInput} />
+          </View>
+        </View>
+        <View style={style.containerInsideTextinput}>
+          <Text style={style.labelText}>publishedDate</Text>
+          <View style={style.viewTextinput}>
+            <TextInput style={style.textInput} />
+          </View>
+        </View>
+        <View style={style.containerInsideTextinput}>
           <Text style={style.labelText}>Category</Text>
           <View style={style.viewTextinput}>
             <MultiSelect

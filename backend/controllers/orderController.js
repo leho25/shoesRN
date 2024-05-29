@@ -23,9 +23,17 @@ const orderController = {
       });
 
       await order.save();
-      res.status(200).json({ message: "Order created success" });
+      res.status(200).json(order);
     } catch (error) {
       console.log("error creating orders", error);
+    }
+  },
+  getAllOrder: async (req, res) => {
+    try {
+      const getAllOrder = await Order.find().populate("product.productId");
+      res.status(200).json(getAllOrder);
+    } catch (error) {
+      res.status(500).json(error);
     }
   },
 };

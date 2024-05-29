@@ -13,10 +13,14 @@ export const getUser = createAsyncThunk('getUser', async userId => {
   const res = await axios.get(`http://10.10.55.54:3000/v1/user/${userId}`);
   return res.data;
 });
-export const getAllUser = createAsyncThunk('getAllUser', async accessToken => {
-  const res = await axios.get('http://10.10.55.54:3000/v1/user', {
-    headers: {token: `Bearer ${accessToken}`},
-  });
+// export const getAllUser = createAsyncThunk('getAllUser', async accessToken => {
+//   const res = await axios.get('http://10.10.55.54:3000/v1/user', {
+//     headers: {token: `Bearer ${accessToken}`},
+//   });
+//   return res.data;
+// });
+export const getAllUser = createAsyncThunk('getAllUser', async () => {
+  const res = await axios.get('http://10.10.55.54:3000/v1/user');
   return res.data;
 });
 export const login = createAsyncThunk(
@@ -52,7 +56,10 @@ export const order = createAsyncThunk('order', async orderData => {
   const res = await axios.post('http://10.10.55.54:3000/v1/orders', orderData);
   return res.data;
 });
-
+export const getAllOrder = createAsyncThunk('getAllOrder', async () => {
+  const res = await axios.get('http://10.10.55.54:3000/v1/orders');
+  return res.data;
+});
 export const cartUser = createAsyncThunk('cartUser', async userId => {
   const res = await axios.get(`http://10.10.55.54:3000/v1/cart/${userId}`);
   return res.data;

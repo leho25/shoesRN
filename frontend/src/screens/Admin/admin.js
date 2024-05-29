@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {style} from '../Admin/style';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUser} from '../../redux/apiRequests';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Admin = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const getUserAdmin = useSelector(state => state.userDetails.userDetail);
+  const getProfileAdmin = async () => {
+    const id = await AsyncStorage.getItem('userId');
+    await dispatch(getUser(id));
+  };
+  useEffect(() => {
+    getProfileAdmin();
+  }, []);
   return (
     <View style={style.main}>
       <View style={style.bgTitle}>
@@ -18,7 +30,9 @@ const Admin = () => {
           />
         </View>
         <View style={style.adminContainerInfor}>
-          <Text style={style.textInforName}>Le Nam</Text>
+          <Text style={style.textInforName}>
+            {getUserAdmin.getUser.username}
+          </Text>
         </View>
       </View>
       <View style={style.containerButtonAdmin}>

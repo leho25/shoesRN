@@ -3,7 +3,7 @@ const userController = require("../controllers/userController");
 
 const router = require("express").Router();
 
-router.get("/", middlewareController.verifyToken, userController.getAllUser);
+router.get("/", userController.getAllUser);
 router.delete(
   "/:id",
   middlewareController.verifyTokenAndAdminAuth,
