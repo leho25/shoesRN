@@ -7,17 +7,14 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      console.log(state.total);
       if (!Array) {
         state.cart = [];
       }
       const itemPresent = state.cart.find(
         item => item.id === action.payload.id,
       );
-      const userPresent = state.cart.find(
-        item => item.userId === action.payload.userId,
-      );
-      if (itemPresent && userPresent) {
+
+      if (itemPresent?.id && itemPresent?.userId) {
         itemPresent.quality++;
       } else {
         state.cart = [...state.cart, action.payload];
@@ -27,12 +24,7 @@ export const cartSlice = createSlice({
       const removedItem = state.cart.filter(item => {
         item.id !== action.payload.id;
       });
-      const userPresent = state.cart.find(
-        item => item.userId === action.payload.userId,
-      );
-      if (userPresent) {
-        state.cart = removedItem;
-      }
+      state.cart = removedItem;
     },
     incrementQuality: (state, action) => {
       const itemPresent = state.cart.find(

@@ -10,6 +10,7 @@ import {
 } from '../../redux/cartSlice';
 import {cartUser, getUser, order} from '../../redux/apiRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Index from '..';
 
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
@@ -33,10 +34,9 @@ const Cart = () => {
     }
   }, []);
   const total = cart
-    .filter(item => item.userId !== userId)
+    .filter(item => item.userId === userId)
     .map(item => item.item.price * item.quality)
     .reduce((pre, current) => pre + current, 0);
-  console.log(total);
   const dispatch = useDispatch();
   const decrementQualityCart = item => {
     dispatch(decrementQuality(item));

@@ -36,6 +36,7 @@ const HomeDetail = ({route, navigation}) => {
   const addItemToCart = () => {
     if (userId) {
       const newItem = {
+        id:id,
         item: item,
         quality: quality,
         userId: userId,

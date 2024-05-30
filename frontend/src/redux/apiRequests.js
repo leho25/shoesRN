@@ -68,3 +68,7 @@ export const addToCart = createAsyncThunk('addToCart', async data => {
   const res = await axios.post(`http://10.10.55.54:3000/v1/cart`, data);
   return res.data;
 });
+export const addShoes = createAsyncThunk('addShoes', async data => {
+  const res = await axios.post(`http://10.10.55.54:3000/v1/shoes`, data);
+  return res.data;
+});

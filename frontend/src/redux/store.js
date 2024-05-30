@@ -19,6 +19,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import addShoesReducer from './addShoesSlice';
 
 const persistConfig = {
   key: 'root',
@@ -35,6 +36,7 @@ const rootReducer = combineSlices({
   orders: orderReducer,
   cartUsers: cartUserReducer,
   orderAll: orderAllSlice,
+  addShoes: addShoesReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
