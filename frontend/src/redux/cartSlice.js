@@ -21,10 +21,10 @@ export const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const removedItem = state.cart.filter(item => {
-        item.id !== action.payload.id;
-      });
-      state.cart = removedItem;
+      console.log('Removing item with id:', action.payload); // Debug log
+      state.cart = state.cart.filter(item => item.id !== action.payload);
+      console.log('Updated items:', state.cart); // Debug log
+      // state.cart = removedItem;
     },
     incrementQuality: (state, action) => {
       const itemPresent = state.cart.find(
@@ -38,10 +38,7 @@ export const cartSlice = createSlice({
       );
       if (itemPresent.quality === 1) {
         itemPresent.quality = 0;
-        const removedItem = state.cart.filter(item => {
-          item.id !== action.payload.id;
-        });
-        state.cart = removedItem;
+        state.cart = state.cart.filter(item => item.id !== action.payload.id);
       } else {
         itemPresent.quality--;
       }

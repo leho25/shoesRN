@@ -8,9 +8,8 @@ import {
   incrementQuality,
   removeFromCart,
 } from '../../redux/cartSlice';
-import {cartUser, getUser, order} from '../../redux/apiRequests';
+import {getUser, order} from '../../redux/apiRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Index from '..';
 
 const Cart = () => {
   const cart = useSelector(state => state.carts.cart);
@@ -28,24 +27,22 @@ const Cart = () => {
       console.log('Not login');
     }
   }, []);
-  useEffect(() => {
-    if (userId) {
-      dispatch(cartUser(userId));
-    }
-  }, []);
   const total = cart
     .filter(item => item.userId === userId)
     .map(item => item.item.price * item.quality)
     .reduce((pre, current) => pre + current, 0);
   const dispatch = useDispatch();
   const decrementQualityCart = item => {
+    console.log('Dispatching:', item);
     dispatch(decrementQuality(item));
   };
   const incrementQualityCart = item => {
+    console.log('Dispatching:', item);
     dispatch(incrementQuality(item));
   };
-  const removedItemCart = item => {
-    dispatch(removeFromCart(item));
+  const removedItemCart = id => {
+    console.log('Dispatching remove item with id:', id);
+    dispatch(removeFromCart(id));
   };
   const handlePlaceOrder = async () => {
     try {
@@ -68,7 +65,7 @@ const Cart = () => {
       <View style={style.containerListCart}>
         {cart.map((item, index) => {
           return (
-            <View key={index}>
+            <View key={item.id}>
               {item.userId === userId ? (
                 <View style={style.insideContainerListCart}>
                   {item.item.image ? (
@@ -105,7 +102,7 @@ const Cart = () => {
                   <View style={style.containerBtnRemove}>
                     <TouchableOpacity
                       style={style.btnRemove}
-                      onPress={() => removedItemCart(item)}>
+                      onPress={() => removedItemCart(item.id)}>
                       <Text style={style.textInforCart}>Remove</Text>
                     </TouchableOpacity>
                   </View>
