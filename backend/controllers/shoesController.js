@@ -39,7 +39,7 @@ const shoesController = {
     try {
       const shoes = await Shoes.findById(req.params.id);
       await shoes.updateOne({ $set: req.body });
-      res.status(200).json("Updated successfully");
+      res.status(200).json(shoes);
     } catch (error) {
       res.status(500).json(error);
     }

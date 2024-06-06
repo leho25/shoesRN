@@ -40,7 +40,7 @@ const ManagerOrder = () => {
                       flexDirection: 'row',
                     }}>
                     <Image
-                      source={{uri: items.productId.image}}
+                      source={{uri: items.productId?.image}}
                       style={{width: 70, height: 70, borderRadius: 70 / 2}}
                     />
                     <View style={{flex: 1, marginLeft: 20}}>
@@ -50,7 +50,7 @@ const ManagerOrder = () => {
                           fontWeight: '500',
                           color: 'black',
                         }}>
-                        Name: {items.productId.name}
+                        Name: {items.productId?.name}
                       </Text>
                       <Text
                         style={{
@@ -58,7 +58,7 @@ const ManagerOrder = () => {
                           fontWeight: '500',
                           color: 'black',
                         }}>
-                        Price: {items.productId.price}
+                        Price: {items.productId?.price}
                       </Text>
                       <Text
                         style={{
@@ -66,7 +66,7 @@ const ManagerOrder = () => {
                           fontWeight: '500',
                           color: 'black',
                         }}>
-                        Quality: {items.quality}
+                        Quality: {items?.quality}
                       </Text>
                       <Text
                         style={{
@@ -74,7 +74,7 @@ const ManagerOrder = () => {
                           fontWeight: '500',
                           color: 'black',
                         }}>
-                        Total: {item.totalPrice}
+                        Total: {item?.totalPrice}
                       </Text>
                     </View>
                   </View>

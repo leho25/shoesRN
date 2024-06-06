@@ -31,7 +31,7 @@ const Admin = () => {
         </View>
         <View style={style.adminContainerInfor}>
           <Text style={style.textInforName}>
-            {getUserAdmin.getUser.username}
+            {getUserAdmin.getUser?.username}
           </Text>
         </View>
       </View>

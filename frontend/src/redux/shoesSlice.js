@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getAllShoes, aPairOfShoes} from './apiRequests';
+import {getAllShoes} from './apiRequests';
 
 export const shoesSlice = createSlice({
   name: 'shoes',
@@ -20,6 +20,7 @@ export const shoesSlice = createSlice({
       state.pending = false;
       state.error = true;
     });
+    
   },
 });
 

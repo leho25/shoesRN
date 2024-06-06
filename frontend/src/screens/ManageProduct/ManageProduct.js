@@ -5,23 +5,34 @@ import {style} from './style';
 import {useNavigation} from '@react-navigation/native';
 import PostProduct from './PostProduct';
 import {useDispatch, useSelector} from 'react-redux';
-import {getAllShoes} from '../../redux/apiRequests';
+import {deleteShoes, getAllShoes} from '../../redux/apiRequests';
 const ManagerProduct = () => {
   const navigation = useNavigation();
+  const getAll = useSelector(state => state.shoes.shoes);
   const [post, setPost] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [idProduct, setIdProduct] = useState('');
   const handlePost = () => {
     setPost(!post);
   };
-  const getAll = useSelector(state => state.shoes.shoes);
-  console.log(getAll);
+  const handleEdit = id => {
+    setIdProduct(id);
+    setEdit(!edit);
+  };
+  const handleDelete = id => {
+    dispatch(deleteShoes(id));
+  };
+  console.log(idProduct);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllShoes());
-  }, []);
+  }, [getAll]);
   return (
     <View style={{flex: 1}}>
       {post ? (
-        <PostProduct />
+        <PostProduct setPost={setPost} />
+      ) : edit ? (
+        <PostProduct id={idProduct} setEdit={setEdit} />
       ) : (
         <>
           <View style={style.headerTitle}>
@@ -36,7 +47,7 @@ const ManagerProduct = () => {
             {getAll.map((item, index) => {
               return (
                 <View
-                  key={index}
+                  key={item._id}
                   style={{
                     borderWidth: 1,
                     borderRadius: 10,
@@ -98,7 +109,8 @@ const ManagerProduct = () => {
                           fontSize: 16,
                           fontWeight: '500',
                           color: 'black',
-                        }}>
+                        }}
+                        onPress={() => handleEdit(item)}>
                         Edit
                       </Text>
                     </TouchableOpacity>
@@ -116,7 +128,8 @@ const ManagerProduct = () => {
                           fontSize: 16,
                           fontWeight: '500',
                           color: 'black',
-                        }}>
+                        }}
+                        onPress={() => handleDelete(item._id)}>
                         Delete
                       </Text>
                     </TouchableOpacity>

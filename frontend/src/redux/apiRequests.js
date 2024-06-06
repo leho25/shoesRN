@@ -72,3 +72,18 @@ export const addShoes = createAsyncThunk('addShoes', async data => {
   const res = await axios.post(`http://10.10.55.54:3000/v1/shoes`, data);
   return res.data;
 });
+export const updateShoes = createAsyncThunk(
+  'updateShoes',
+  async (id, update) => {
+    const res = await axios.put(
+      `http://10.10.55.54:3000/v1/shoes/${id}`,
+      update,
+    );
+    console.log('123', res.data);
+  },
+);
+
+export const deleteShoes = createAsyncThunk('deleteShoes', async id => {
+  const res = await axios.delete(`http://10.10.55.54:3000/v1/shoes/${id}`);
+  return res.data;
+});
